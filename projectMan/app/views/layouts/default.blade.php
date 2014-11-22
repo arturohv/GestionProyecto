@@ -285,7 +285,10 @@
                                     <a href="/cargos">Cargos</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="/departamentos">Departamentos</a>
+                                </li>
+                                <li>
+                                    <a href="/ramas">Ramas Ejecutivas</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

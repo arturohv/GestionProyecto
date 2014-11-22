@@ -1,4 +1,5 @@
-﻿create table proyectos(
+﻿
+create table proyectos(
 	id serial not null primary key,
 	nombre text not null,
 	empresa text not null,
@@ -174,7 +175,8 @@ create table alcances(
 
 create table calificaciones(
 	id serial not null primary key,	
-	descripcion varchar(30) not null
+	nombre varchar(30) not null,
+	descripcion text not null
 );
 
 create table costos(
@@ -194,8 +196,9 @@ create table adquisiciones(
 /*Check FK*/
 
 create table ramas_ejecutivas(
-	id serial not null primary key,	
-	descripcion varchar(60) not null
+	id serial not null primary key,
+	nombre varchar(30),	
+	descripcion text not null
 );
 
 

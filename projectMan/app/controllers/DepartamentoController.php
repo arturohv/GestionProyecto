@@ -1,6 +1,6 @@
 <?php
 
-class CargoController extends \BaseController {
+class DepartamentoController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,18 +9,18 @@ class CargoController extends \BaseController {
 	 */
 	public function index()
 	{
-		//$cargos = Cargo::all()
-		$cargos = DB::table('cargos')
+		
+		$departamentos = DB::table('departamentos')
                     ->orderBy('nombre')                    
                     ->get();
 
-		$this->layout->title = 'Cargos';
+		$this->layout->title = 'Departamentos';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'cargos.index',
+			'departamentos.index',
 			array(
-				'cargos' => $cargos
+				'departamentos' => $departamentos
 			)
 		);
 	}
@@ -33,11 +33,11 @@ class CargoController extends \BaseController {
 	 */
 	public function create()
 	{
-		$this->layout->title = 'Nuevo Cargo';
+		$this->layout->title = 'Nuevo Departamento';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'cargos.create',
+			'departamentos.create',
 			array()
 		);
 	}
@@ -52,12 +52,12 @@ class CargoController extends \BaseController {
 	{
 		$nombre = Input::get('nombre');
 		$descripcion = Input::get('descripcion');		
-		$cargo = new Cargo();
-		$cargo->nombre = $nombre;
-		$cargo->descripcion = $descripcion;
-		$cargo->save();
+		$departamento = new Departamento();
+		$departamento->nombre = $nombre;
+		$departamento->descripcion = $descripcion;
+		$departamento->save();
 		Session::flash('message', 'Registro guardado satisfactoriamente!');
-		return Redirect::to('cargos');
+		return Redirect::to('departamentos');
 	}
 
 
@@ -69,14 +69,14 @@ class CargoController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$this->layout->title = 'Mostrar Cargo';
+		$this->layout->title = 'Mostrar Departamento';
 		$this->layout->titulo = 'Mantenimiento';
-		$cargo = Cargo::find($id);
+		$departamento = Departamento::find($id);
 		$this->layout->nest(
 			'content',
-			'cargos.show',
+			'departamentos.show',
 			array(
-				'cargo' => $cargo
+				'departamento' => $departamento
 			)
 		);
 	}
@@ -90,14 +90,14 @@ class CargoController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$this->layout->title = 'Editar Cargo';
+		$this->layout->title = 'Editar Departamento';
 		$this->layout->titulo = 'Mantenimiento';
-		$cargo = Cargo::find($id);
+		$departamento = Departamento::find($id);
 		$this->layout->nest(
 			'content',
-			'cargos.edit',
+			'departamentos.edit',
 			array(
-				'cargo' => $cargo
+				'departamento' => $departamento
 			)
 		);
 	}
@@ -114,12 +114,12 @@ class CargoController extends \BaseController {
 		$nombre = Input::get('nombre');
 		$descripcion = Input::get('descripcion');
 		
-		$cargo = Cargo::find($id);
-		$cargo->nombre = $nombre;
-		$cargo->descripcion = $descripcion;
-		$cargo->save();
+		$departamento = Departamento::find($id);
+		$departamento->nombre = $nombre;
+		$departamento->descripcion = $descripcion;
+		$departamento->save();
 		Session::flash('message', 'Registro actualizado satisfactoriamente!');
-		return Redirect::to('cargos');
+		return Redirect::to('departamentos');
 	}
 
 
@@ -131,10 +131,10 @@ class CargoController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$cargo = Cargo::find($id);
-		$cargo->delete();
+		$departamento = Departamento::find($id);
+		$departamento->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
-		return Redirect::to('cargos');
+		return Redirect::to('departamentos');
 	}
 
 

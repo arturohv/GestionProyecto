@@ -1,6 +1,6 @@
 <?php
 
-class CargoController extends \BaseController {
+class RamaEjecutivaController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,18 +9,18 @@ class CargoController extends \BaseController {
 	 */
 	public function index()
 	{
-		//$cargos = Cargo::all()
-		$cargos = DB::table('cargos')
+		
+		$ramas = DB::table('ramas_ejecutivas')
                     ->orderBy('nombre')                    
                     ->get();
 
-		$this->layout->title = 'Cargos';
+		$this->layout->title = 'Ramas Ejecutivas';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'cargos.index',
+			'ramasejecutivas.index',
 			array(
-				'cargos' => $cargos
+				'ramas' => $ramas
 			)
 		);
 	}
@@ -33,11 +33,11 @@ class CargoController extends \BaseController {
 	 */
 	public function create()
 	{
-		$this->layout->title = 'Nuevo Cargo';
+		$this->layout->title = 'Nueva Rama Ejecutiva';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'cargos.create',
+			'ramasejecutivas.create',
 			array()
 		);
 	}
@@ -52,12 +52,12 @@ class CargoController extends \BaseController {
 	{
 		$nombre = Input::get('nombre');
 		$descripcion = Input::get('descripcion');		
-		$cargo = new Cargo();
-		$cargo->nombre = $nombre;
-		$cargo->descripcion = $descripcion;
-		$cargo->save();
+		$rama = new RamaEjecutiva();
+		$rama->nombre = $nombre;
+		$rama->descripcion = $descripcion;
+		$rama->save();
 		Session::flash('message', 'Registro guardado satisfactoriamente!');
-		return Redirect::to('cargos');
+		return Redirect::to('ramas');
 	}
 
 
@@ -69,14 +69,14 @@ class CargoController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$this->layout->title = 'Mostrar Cargo';
+		$this->layout->title = 'Mostrar Rama Ejecutiva';
 		$this->layout->titulo = 'Mantenimiento';
-		$cargo = Cargo::find($id);
+		$rama = RamaEjecutiva::find($id);
 		$this->layout->nest(
 			'content',
-			'cargos.show',
+			'ramasejecutivas.show',
 			array(
-				'cargo' => $cargo
+				'rama' => $rama
 			)
 		);
 	}
@@ -90,14 +90,14 @@ class CargoController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$this->layout->title = 'Editar Cargo';
+		$this->layout->title = 'Editar Rama Ejecutiva';
 		$this->layout->titulo = 'Mantenimiento';
-		$cargo = Cargo::find($id);
+		$rama = RamaEjecutiva::find($id);
 		$this->layout->nest(
 			'content',
-			'cargos.edit',
+			'ramasejecutivas.edit',
 			array(
-				'cargo' => $cargo
+				'rama' => $rama
 			)
 		);
 	}
@@ -114,12 +114,12 @@ class CargoController extends \BaseController {
 		$nombre = Input::get('nombre');
 		$descripcion = Input::get('descripcion');
 		
-		$cargo = Cargo::find($id);
-		$cargo->nombre = $nombre;
-		$cargo->descripcion = $descripcion;
-		$cargo->save();
+		$rama = RamaEjecutiva::find($id);
+		$rama->nombre = $nombre;
+		$rama->descripcion = $descripcion;
+		$rama->save();
 		Session::flash('message', 'Registro actualizado satisfactoriamente!');
-		return Redirect::to('cargos');
+		return Redirect::to('ramas');
 	}
 
 
@@ -131,10 +131,10 @@ class CargoController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$cargo = Cargo::find($id);
-		$cargo->delete();
+		$rama = RamaEjecutiva::find($id);
+		$rama->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
-		return Redirect::to('cargos');
+		return Redirect::to('ramas');
 	}
 
 
