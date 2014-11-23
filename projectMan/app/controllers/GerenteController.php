@@ -10,10 +10,10 @@ class GerenteController extends \BaseController {
 	public function index()
 	{
 			
-		$gerentes = DB::table('gerentes')
+		/*$gerentes = DB::table('gerentes')
                     ->orderBy('nombre')                    
-                    ->get();
-
+                    ->get();*/
+        $gerentes = Gerente::getListGerentes();             
 
 		$this->layout->title = 'Gerentes';
 		$this->layout->titulo = 'Mantenimiento';
@@ -32,33 +32,15 @@ class GerenteController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+	
+
+
 	public function create()
 	{
-		$cargos = DB::table('cargos')->select('id', 'nombre')->orderBy('nombre')->get();
-		$lstCargos = array();
 		
-		foreach ($cargos as $cargo)
-		{
-		     $lstCargos[$cargo->id] = $cargo->nombre;
-		}
-		
-		
-		$departamentos = DB::table('departamentos')->select('id', 'nombre')->orderBy('nombre')->get();
-		$lstDeptos = array();
-
-		foreach ($departamentos as $departamento)
-		{
-		     $lstDeptos[$departamento->id] = $departamento->nombre;
-		}
-
-		$ramas = DB::table('ramas_ejecutivas')->select('id', 'nombre')->orderBy('nombre')->get();
-		$lstRamas = array();
-
-		foreach ($ramas as $rama)
-		{
-		     $lstRamas[$rama->id] = $rama->nombre;
-		}
-                        
+		$cargos = Cargo::getListCargos();
+		$departamentos = Departamento::getListDeptos();		
+		$ramas = RamaEjecutiva::getListRamas();                       
 
 		$this->layout->title = 'Nuevo gerente';
 		$this->layout->titulo = 'Mantenimiento';
@@ -66,9 +48,9 @@ class GerenteController extends \BaseController {
 			'content',
 			'gerentes.create',
 			array(
-				'cargos' => $lstCargos,
-				'departamentos' => $lstDeptos,
-				'ramas' => $lstRamas
+				'cargos' => $cargos,
+				'departamentos' => $departamentos,
+				'ramas' => $ramas
 			)
 		);
 
@@ -136,14 +118,23 @@ class GerenteController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		$cargos = Cargo::getListCargos();
+		$departamentos = Departamento::getListDeptos();		
+		$ramas = RamaEjecutiva::getListRamas();   
+
 		$this->layout->title = 'Editar gerente';
 		$this->layout->titulo = 'Mantenimiento';
 		$gerente = Gerente::find($id);
+
+
 		$this->layout->nest(
 			'content',
 			'gerentes.edit',
 			array(
-				'gerente' => $gerente
+				'gerente' => $gerente,
+				'cargos' => $cargos,
+				'departamentos' => $departamentos,
+				'ramas' => $ramas
 			)
 		);
 	}
@@ -181,7 +172,7 @@ class GerenteController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$gerente = gerente::find($id);
+		$gerente = Gerente::find($id);
 		$gerente->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
 		return Redirect::to('gerentes');

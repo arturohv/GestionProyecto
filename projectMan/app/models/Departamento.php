@@ -10,4 +10,15 @@ class Departamento extends Eloquent
     public function gerente() {
 		return $this->hasMany('Gerente'); // this matches the Eloquent model
 	}
+
+	public static function getListDeptos(){
+		$departamentos = DB::table('departamentos')->select('id', 'nombre')->orderBy('nombre')->get();
+		$lstDeptos = array();
+
+		foreach ($departamentos as $departamento)
+		{
+		     $lstDeptos[$departamento->id] = $departamento->nombre;
+		}
+		return $lstDeptos;
+	}
 }

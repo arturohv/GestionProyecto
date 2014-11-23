@@ -29,9 +29,9 @@
                                 </thead>
                                 <tbody>
                                     @foreach($gerentes as $gerente)
-                                    <tr>
-                                         
+                                    <tr>                                         
                                         <td>{{ $gerente->nombre }}</td>
+                                        <td>{{ $gerente->departamento }}</td>
                                         <td>
                                         {{link_to("gerentes/$gerente->id/show", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-eye-open'), $secure = null);}}
 
