@@ -1,6 +1,6 @@
 <?php
 
-class GerenteController extends \BaseController {
+class patrocinadorController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -8,18 +8,17 @@ class GerenteController extends \BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
-			
+	{		
 		
-        $gerentes = Gerente::getListIndex();             
+        $patrocinadores = Patrocinador::getListIndex();             
 
-		$this->layout->title = 'Gerentes';
+		$this->layout->title = 'patrocinadores';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'gerentes.index',
+			'patrocinadores.index',
 			array(
-				'gerentes' => $gerentes
+				'patrocinadores' => $patrocinadores
 			)
 		);
 	}
@@ -40,11 +39,11 @@ class GerenteController extends \BaseController {
 		$departamentos = Departamento::getListDeptos();		
 		$ramas = RamaEjecutiva::getListRamas();                       
 
-		$this->layout->title = 'Nuevo gerente';
+		$this->layout->title = 'Nuevo patrocinador';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'gerentes.create',
+			'patrocinadores.create',
 			array(
 				'cargos' => $cargos,
 				'departamentos' => $departamentos,
@@ -68,14 +67,14 @@ class GerenteController extends \BaseController {
 		$rama_ejecutivaid = Input::get('rama_ejecutivaid');		
 		
 
-		$gerente = new Gerente();
-		$gerente->nombre = $nombre;
-		$gerente->cargoid = $cargoid;
-		$gerente->departamentoid = $departamentoid;
-		$gerente->rama_ejecutivaid = $rama_ejecutivaid;
-		$gerente->save();
+		$patrocinador = new Patrocinador();
+		$patrocinador->nombre = $nombre;
+		$patrocinador->cargoid = $cargoid;
+		$patrocinador->departamentoid = $departamentoid;
+		$patrocinador->rama_ejecutivaid = $rama_ejecutivaid;
+		$patrocinador->save();
 		Session::flash('message', 'Registro guardado satisfactoriamente!');
-		return Redirect::to('gerentes');
+		return Redirect::to('patrocinadores');
 	}
 
 
@@ -87,19 +86,19 @@ class GerenteController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$this->layout->title = 'Mostrar gerente';
+		$this->layout->title = 'Mostrar patrocinador';
 		$this->layout->titulo = 'Mantenimiento';
-		$gerente = Gerente::find($id);
-		$cargo = $gerente->cargo;
-		$departamento = $gerente->departamento;
-		$rama = $gerente->rama;
+		$patrocinador = Patrocinador::find($id);
+		$cargo = $patrocinador->cargo;
+		$departamento = $patrocinador->departamento;
+		$rama = $patrocinador->rama;
 		
-		//dd($gerente);
+		//dd($patrocinador);
 		$this->layout->nest(
 			'content',
-			'gerentes.show',
+			'patrocinadores.show',
 			array(
-				'gerente' => $gerente,
+				'patrocinador' => $patrocinador,
 				'cargo' => $cargo,
 				'departamento' => $departamento,
 				'rama' => $rama				
@@ -120,16 +119,16 @@ class GerenteController extends \BaseController {
 		$departamentos = Departamento::getListDeptos();		
 		$ramas = RamaEjecutiva::getListRamas();   
 
-		$this->layout->title = 'Editar gerente';
+		$this->layout->title = 'Editar patrocinador';
 		$this->layout->titulo = 'Mantenimiento';
-		$gerente = Gerente::find($id);
+		$patrocinador = Patrocinador::find($id);
 
 
 		$this->layout->nest(
 			'content',
-			'gerentes.edit',
+			'patrocinadores.edit',
 			array(
-				'gerente' => $gerente,
+				'patrocinador' => $patrocinador,
 				'cargos' => $cargos,
 				'departamentos' => $departamentos,
 				'ramas' => $ramas
@@ -151,14 +150,14 @@ class GerenteController extends \BaseController {
 		$departamentoid = Input::get('departamentoid');
 		$rama_ejecutivaid = Input::get('rama_ejecutivaid');
 		
-		$gerente = Gerente::find($id);
-		$gerente->nombre = $nombre;
-		$gerente->cargoid = $cargoid;
-		$gerente->departamentoid = $departamentoid;
-		$gerente->rama_ejecutivaid = $rama_ejecutivaid;
-		$gerente->save();
+		$patrocinador = Patrocinador::find($id);
+		$patrocinador->nombre = $nombre;
+		$patrocinador->cargoid = $cargoid;
+		$patrocinador->departamentoid = $departamentoid;
+		$patrocinador->rama_ejecutivaid = $rama_ejecutivaid;
+		$patrocinador->save();
 		Session::flash('message', 'Registro actualizado satisfactoriamente!');
-		return Redirect::to('gerentes');
+		return Redirect::to('patrocinadores');
 	}
 
 
@@ -170,10 +169,10 @@ class GerenteController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$gerente = Gerente::find($id);
-		$gerente->delete();
+		$patrocinador = Patrocinador::find($id);
+		$patrocinador->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
-		return Redirect::to('gerentes');
+		return Redirect::to('patrocinadores');
 	}
 
 

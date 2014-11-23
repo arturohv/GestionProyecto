@@ -1,6 +1,6 @@
 <?php
 
-class GerenteController extends \BaseController {
+class EmpleadoController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,16 +10,18 @@ class GerenteController extends \BaseController {
 	public function index()
 	{
 			
-		
-        $gerentes = Gerente::getListIndex();             
+		/*$empleados = DB::table('empleados')
+                    ->orderBy('nombre')                    
+                    ->get();*/
+        $empleados = Empleado::getListIndex();             
 
-		$this->layout->title = 'Gerentes';
+		$this->layout->title = 'Empleados';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'gerentes.index',
+			'empleados.index',
 			array(
-				'gerentes' => $gerentes
+				'empleados' => $empleados
 			)
 		);
 	}
@@ -40,11 +42,11 @@ class GerenteController extends \BaseController {
 		$departamentos = Departamento::getListDeptos();		
 		$ramas = RamaEjecutiva::getListRamas();                       
 
-		$this->layout->title = 'Nuevo gerente';
+		$this->layout->title = 'Nuevo empleado';
 		$this->layout->titulo = 'Mantenimiento';
 		$this->layout->nest(
 			'content',
-			'gerentes.create',
+			'empleados.create',
 			array(
 				'cargos' => $cargos,
 				'departamentos' => $departamentos,
@@ -68,14 +70,14 @@ class GerenteController extends \BaseController {
 		$rama_ejecutivaid = Input::get('rama_ejecutivaid');		
 		
 
-		$gerente = new Gerente();
-		$gerente->nombre = $nombre;
-		$gerente->cargoid = $cargoid;
-		$gerente->departamentoid = $departamentoid;
-		$gerente->rama_ejecutivaid = $rama_ejecutivaid;
-		$gerente->save();
+		$empleado = new Empleado();
+		$empleado->nombre = $nombre;
+		$empleado->cargoid = $cargoid;
+		$empleado->departamentoid = $departamentoid;
+		$empleado->rama_ejecutivaid = $rama_ejecutivaid;
+		$empleado->save();
 		Session::flash('message', 'Registro guardado satisfactoriamente!');
-		return Redirect::to('gerentes');
+		return Redirect::to('empleados');
 	}
 
 
@@ -87,19 +89,19 @@ class GerenteController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$this->layout->title = 'Mostrar gerente';
+		$this->layout->title = 'Mostrar empleado';
 		$this->layout->titulo = 'Mantenimiento';
-		$gerente = Gerente::find($id);
-		$cargo = $gerente->cargo;
-		$departamento = $gerente->departamento;
-		$rama = $gerente->rama;
+		$empleado = Empleado::find($id);
+		$cargo = $empleado->cargo;
+		$departamento = $empleado->departamento;
+		$rama = $empleado->rama;
 		
-		//dd($gerente);
+		//dd($empleado);
 		$this->layout->nest(
 			'content',
-			'gerentes.show',
+			'empleados.show',
 			array(
-				'gerente' => $gerente,
+				'empleado' => $empleado,
 				'cargo' => $cargo,
 				'departamento' => $departamento,
 				'rama' => $rama				
@@ -120,16 +122,16 @@ class GerenteController extends \BaseController {
 		$departamentos = Departamento::getListDeptos();		
 		$ramas = RamaEjecutiva::getListRamas();   
 
-		$this->layout->title = 'Editar gerente';
+		$this->layout->title = 'Editar empleado';
 		$this->layout->titulo = 'Mantenimiento';
-		$gerente = Gerente::find($id);
+		$empleado = Empleado::find($id);
 
 
 		$this->layout->nest(
 			'content',
-			'gerentes.edit',
+			'empleados.edit',
 			array(
-				'gerente' => $gerente,
+				'empleado' => $empleado,
 				'cargos' => $cargos,
 				'departamentos' => $departamentos,
 				'ramas' => $ramas
@@ -151,14 +153,14 @@ class GerenteController extends \BaseController {
 		$departamentoid = Input::get('departamentoid');
 		$rama_ejecutivaid = Input::get('rama_ejecutivaid');
 		
-		$gerente = Gerente::find($id);
-		$gerente->nombre = $nombre;
-		$gerente->cargoid = $cargoid;
-		$gerente->departamentoid = $departamentoid;
-		$gerente->rama_ejecutivaid = $rama_ejecutivaid;
-		$gerente->save();
+		$empleado = Empleado::find($id);
+		$empleado->nombre = $nombre;
+		$empleado->cargoid = $cargoid;
+		$empleado->departamentoid = $departamentoid;
+		$empleado->rama_ejecutivaid = $rama_ejecutivaid;
+		$empleado->save();
 		Session::flash('message', 'Registro actualizado satisfactoriamente!');
-		return Redirect::to('gerentes');
+		return Redirect::to('empleados');
 	}
 
 
@@ -170,10 +172,10 @@ class GerenteController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$gerente = Gerente::find($id);
-		$gerente->delete();
+		$empleado = Empleado::find($id);
+		$empleado->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
-		return Redirect::to('gerentes');
+		return Redirect::to('empleados');
 	}
 
 

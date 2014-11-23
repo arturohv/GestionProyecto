@@ -1,8 +1,8 @@
 <?php
 
-class Gerente extends Eloquent
+class Empleado extends Eloquent
 {
-    protected $table      = 'gerentes';
+    protected $table      = 'empleados';
     protected $fillable   = array('nombre','cargoid','departamentoid','rama_ejecutivaid');
     protected $guarded    = array('id');
     public    $timestamps = false;
@@ -24,24 +24,12 @@ class Gerente extends Eloquent
 	public static function getListIndex()
 	{
 		$sql = 'select g.id as id, g.nombre as nombre, c.nombre as cargo, d.nombre as departamento, r.nombre as rama 
-				from gerentes g
+				from empleados g
 				inner join cargos c on g.cargoid = c.id
 				inner join departamentos d on g.departamentoid = d.id
 				inner join ramas_ejecutivas r on g.rama_ejecutivaid = r.id
 				order by g.nombre';
 				return DB::select($sql);
-	}
-
-	public static function getListCmb(){
-		$registros = DB::table('gerentes')->select('id', 'nombre')->orderBy('nombre')->get();
-		$lista = array();
-		
-		foreach ($registros as $registro)
-		{
-		     $lista[$registro->id] = $registro->nombre;
-		}
-
-		return $lista;
 	}
 
 
