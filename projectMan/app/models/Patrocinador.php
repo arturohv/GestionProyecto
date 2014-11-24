@@ -7,7 +7,9 @@ class Patrocinador extends Eloquent
     protected $guarded    = array('id');
     public    $timestamps = false;
 
-    
+    public function patrocinador() {
+		return $this->hasMany('Proyecto'); // this matches the Eloquent model
+	}
 
 	public function cargo() {
 		return $this->belongsTo('Cargo','cargoid');

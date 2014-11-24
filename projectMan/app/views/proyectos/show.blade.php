@@ -29,16 +29,16 @@
                                     <tr>
                                     <td><strong>Fecha:</strong></td>
                                     <td>{{$proyecto->fecha}}</td>
-                                    </tr>
+                                    </tr>   
 
                                     <tr>
                                     <td><strong>Cliente:</strong></td>
-                                    <td>{{$proyecto->clienteid}}</td>
+                                    <td>{{$cliente->nombre}}</td>
                                     </tr>
 
                                     <tr>
-                                    <td><strong>Patrocidador:</strong></td>
-                                    <td>{{$proyecto->clienteid}}</td>
+                                    <td><strong>Patrocidador Principal:</strong></td>
+                                    <td>{{$patrocinador->nombre}}</td>
                                     </tr>
 
                                     <tr>
@@ -47,8 +47,8 @@
                                     </tr>
 
                                     <tr>
-                                    <td><strong>Gerente:</strong></td>
-                                    <td>{{$proyecto->clienteid}}</td>
+                                    <td><strong>Gerente Principal:</strong></td>
+                                    <td>{{$gerente->nombre}}</td>
                                     </tr>
 
                                     <tr>

@@ -79,12 +79,12 @@ create table gerentes(
 	rama_ejecutivaid int not null
 );
 
-create table gerente_proyecto(
+/*create table gerente_proyecto(
 	id serial not null primary key,
 	gerenteid int not null,
 	proyectoid int not null,
 	UNIQUE (gerenteid,proyectoid)
-);
+);*/
 
 /*Check FK*/
 
@@ -250,5 +250,5 @@ alter table costos add constraint fk_costos_alcances foreign key (alcanceid) ref
 
 alter table adquisiciones add constraint fk_adquisiciones_alcances foreign key (alcanceid) references alcances (id);
 
-alter table gerente_proyecto add constraint fk_gerente_proyecto_gerentes foreign key (gerenteid) references gerentes (id);
-alter table gerente_proyecto add constraint fk_gerente_proyecto_proyectos foreign key (proyectoid) references proyectos (id);
+/*alter table gerente_proyecto add constraint fk_gerente_proyecto_gerentes foreign key (gerenteid) references gerentes (id);*/
+/*alter table gerente_proyecto add constraint fk_gerente_proyecto_proyectos foreign key (proyectoid) references proyectos (id);*/

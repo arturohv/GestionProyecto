@@ -8,6 +8,11 @@ class Cliente extends Eloquent
     public    $timestamps = false;
 
 
+    public function cliente() {
+		return $this->hasMany('Proyecto'); // this matches the Eloquent model
+	}
+
+
     public static function getListCmb(){
 		$registros = DB::table('clientes')->select('id', 'nombre')->orderBy('nombre')->get();
 		$lista = array();

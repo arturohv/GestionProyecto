@@ -103,11 +103,17 @@ class ProyectoController extends \BaseController {
 		$this->layout->title = 'Mostrar Proyecto';
 		$this->layout->titulo = 'Mantenimiento';
 		$proyecto = Proyecto::find($id);
+		$cliente = $proyecto->cliente;
+		$patrocinador = $proyecto->patrocinador;
+		$gerente = $proyecto->gerente;		
 		$this->layout->nest(
 			'content',
 			'proyectos.show',
 			array(
-				'proyecto' => $proyecto
+				'proyecto' => $proyecto,
+				'cliente' => $cliente,
+				'patrocinador' => $patrocinador,
+				'gerente' => $gerente
 			)
 		);
 	}

@@ -8,6 +8,9 @@ class Gerente extends Eloquent
     public    $timestamps = false;
 
     
+    public function gerente() {
+		return $this->hasMany('Proyecto'); // this matches the Eloquent model
+	}
 
 	public function cargo() {
 		return $this->belongsTo('Cargo','cargoid');
