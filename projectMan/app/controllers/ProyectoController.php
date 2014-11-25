@@ -14,7 +14,7 @@ class ProyectoController extends \BaseController {
                     ->get();
 
 		$this->layout->title = 'proyectos';
-		$this->layout->titulo = 'Mantenimiento';
+		$this->layout->titulo = 'Gestión de Proyectos';
 		$this->layout->nest(
 			'content',
 			'proyectos.index',
@@ -37,7 +37,7 @@ class ProyectoController extends \BaseController {
 		$gerentes = Gerente::getListCmb();
 
 		$this->layout->title = 'Nuevo proyecto';
-		$this->layout->titulo = 'Mantenimiento';
+		$this->layout->titulo = 'Gestión de Proyectos';
 		$this->layout->nest(
 			'content',
 			'proyectos.create',
@@ -101,7 +101,7 @@ class ProyectoController extends \BaseController {
 	public function show($id)
 	{
 		$this->layout->title = 'Mostrar Proyecto';
-		$this->layout->titulo = 'Mantenimiento';
+		$this->layout->titulo = 'Gestión de Proyectos';
 		$proyecto = Proyecto::find($id);
 		$cliente = $proyecto->cliente;
 		$patrocinador = $proyecto->patrocinador;
@@ -132,7 +132,7 @@ class ProyectoController extends \BaseController {
 		$gerentes = Gerente::getListCmb();
 
 		$this->layout->title = 'Editar Proyecto';
-		$this->layout->titulo = 'Mantenimiento';
+		$this->layout->titulo = 'Gestión de Proyectos';
 		$proyecto = Proyecto::find($id);
 		$this->layout->nest(
 			'content',
@@ -201,6 +201,23 @@ class ProyectoController extends \BaseController {
 		$proyecto->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
 		return Redirect::to('proyectos');
+	}
+
+
+	public function attribute($id)
+	{
+		$proyecto = Proyecto::find($id);
+		$patrocinadores = Proyecto::getListPatrocinadores($id);
+		$this->layout->title = 'Atributos de Proyecto';
+		$this->layout->titulo = 'Gestión de Proyectos';		
+		$this->layout->nest(
+			'content',
+			'proyectos.attribute',
+			array(
+				'proyecto' => $proyecto,
+				'patrocinadores' => $patrocinadores				
+			)
+		);
 	}
 
 

@@ -18,4 +18,15 @@ class Proyecto extends Eloquent
 	public function gerente() {
 		return $this->belongsTo('Gerente','gerenteid');
 	}
+
+	public static function getListPatrocinadores($id)
+	{
+		$sql = 'select pp.id, p.id, pt.nombre
+				from patrocinadores_proyectos pp
+				inner join proyectos p on p.id = pp.proyectoid
+				inner join patrocinadores pt on pt.id = pp.patrocinadorid
+				where pp.proyectoid = '.$id;
+				return DB::select($sql);
+	}
+	
 }

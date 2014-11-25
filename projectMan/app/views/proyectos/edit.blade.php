@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('patrocinadorid', 'Patrocinador') }}
+                            {{ Form::label('patrocinadorid', 'Patrocinador Principal') }}
                             {{ Form::select('patrocinadorid', $patrocinadores, $proyecto->patrocinadorid, array('class' => 'form-control')) }}   
                         </div>
 
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('gerenteid', 'Gerente') }}
+                            {{ Form::label('gerenteid', 'Gerente Principal') }}
                             {{ Form::select('gerenteid', $gerentes, $proyecto->gerenteid, array('class' => 'form-control')) }}   
                         </div>          
                         

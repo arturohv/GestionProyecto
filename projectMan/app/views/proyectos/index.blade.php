@@ -38,6 +38,8 @@
                                         {{link_to("proyectos/$proyecto->id/edit", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-pencil'), $secure = null);}}
 
                                         {{link_to("proyectos/$proyecto->id/delete", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-trash'), $secure = null);}}
+
+                                        {{link_to("proyectos/$proyecto->id/attribute", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-tags'), $secure = null);}}
                                         </td>
                                     </tr>
                                     @endforeach

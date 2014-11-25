@@ -23,6 +23,10 @@ class Patrocinador extends Eloquent
 		return $this->belongsTo('RamaEjecutiva','rama_ejecutivaid');
 	}
 
+	public function patrocinador_proyecto() {
+		return $this->belongsTo('Patrocinador_Proyecto','id');
+	}
+
 	public static function getListIndex()
 	{
 		$sql = 'select g.id as id, g.nombre as nombre, c.nombre as cargo, d.nombre as departamento, r.nombre as rama 
