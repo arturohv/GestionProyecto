@@ -1,6 +1,6 @@
 <?php
 
-class PatrocinadorProyectoController extends \BaseController {
+class EmpleadoProyectoController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,16 +16,16 @@ class PatrocinadorProyectoController extends \BaseController {
 	 */
 	public function create($id)
 	{		
-		$patrocinadores = Patrocinador::getListCmb($id);		
+		$empleados = Empleado::getListCmb($id);		
         $proyecto = Proyecto::find($id);
-		$this->layout->title = 'Nuevo Patrocinador';
+		$this->layout->title = 'Nuevo Empleado';
 		$this->layout->titulo = 'Gestión de Proyectos';
 		$this->layout->nest(
 			'content',
-			'patrocinadoresproyectos.create',
+			'empleadosproyectos.create',
 			array(
 				'proyecto' => $proyecto,				
-				'patrocinadores' => $patrocinadores				
+				'empleados' => $empleados				
 			)
 		);
 	}
@@ -40,10 +40,10 @@ class PatrocinadorProyectoController extends \BaseController {
 	public function store()
 	{
 		$proyectoid = Input::get('proyectoid');
-		$patrocinadorid = Input::get('patrocinadorid');
-		$proyecto = new PatrocinadorProyecto();
+		$empleadoid = Input::get('empleadoid');
+		$proyecto = new EmpleadoProyecto();
 		$proyecto->proyectoid = $proyectoid;
-		$proyecto->patrocinadorid = $patrocinadorid;
+		$proyecto->empleadoid = $empleadoid;
 		$proyecto->save();
 		Session::flash('message', 'Registro guardado satisfactoriamente!');
 		return Redirect::to('proyectos/'.$proyectoid.'/attribute');
@@ -57,9 +57,9 @@ class PatrocinadorProyectoController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$patrocinadorP = PatrocinadorProyecto::find($id);
-		$proyectoid = $patrocinadorP->proyectoid;
-		$patrocinadorP->delete();
+		$empleadoP = EmpleadoProyecto::find($id);
+		$proyectoid = $empleadoP->proyectoid;
+		$empleadoP->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
 		return Redirect::to('proyectos/'.$proyectoid.'/attribute');
 	}

@@ -38,8 +38,28 @@ class Patrocinador extends Eloquent
 				return DB::select($sql);
 	}
 
-	public static function getListCmb(){
-		$registros = DB::table('patrocinadores')->select('id', 'nombre')->orderBy('nombre')->get();
+	public static function getListCmbAll(){		
+		$sql = 'select id, nombre 
+				from patrocinadores';
+		
+		$registros = DB::select($sql);		
+		$lista = array();
+		
+		foreach ($registros as $registro)
+		{
+		     $lista[$registro->id] = $registro->nombre;
+		}
+
+		return $lista;
+	}
+
+	public static function getListCmb($id){		
+		$sql = 'select p.id, p.nombre 
+				from patrocinadores p
+				where (p.id not in (Select patrocinadorid from patrocinadores_proyectos where proyectoid = ' . $id . '))
+				and (p.id not in (Select patrocinadorid from proyectos where id = ' . $id . '))';
+		
+		$registros = DB::select($sql);		
 		$lista = array();
 		
 		foreach ($registros as $registro)

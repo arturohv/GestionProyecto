@@ -32,5 +32,22 @@ class Empleado extends Eloquent
 				return DB::select($sql);
 	}
 
+	public static function getListCmb($id){		
+		$sql = 'select p.id, p.nombre 
+				from empleados p
+				where (p.id not in (Select empleadoid from empleados_proyectos where proyectoid = ' . $id . '))';
+				
+		
+		$registros = DB::select($sql);		
+		$lista = array();
+		
+		foreach ($registros as $registro)
+		{
+		     $lista[$registro->id] = $registro->nombre;
+		}
+
+		return $lista;
+	}
+
 
 }

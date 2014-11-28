@@ -32,5 +32,23 @@ class Interesado extends Eloquent
 				return DB::select($sql);
 	}
 
+	public static function getListCmb($id){		
+		$sql = 'select p.id, p.nombre 
+				from interesados p
+				where (p.id not in (Select interesadoid from interesados_proyectos where proyectoid = ' . $id . '))';
+				
+		
+		$registros = DB::select($sql);		
+		$lista = array();
+		
+		foreach ($registros as $registro)
+		{
+		     $lista[$registro->id] = $registro->nombre;
+		}
+
+		return $lista;
+	}
+
+
 
 }

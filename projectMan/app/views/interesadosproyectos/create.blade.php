@@ -2,10 +2,10 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fglyphicon glyphicon-plus"></i> Agregar nuevo patrocinador                
+                <i class="fglyphicon glyphicon-plus"></i> Agregar nuevo interesado                
             </div>
             {{ HTML::ul($errors->all()) }}
-            {{ Form::open(array('url' => 'patrocinadores_proyectos')) }}     
+            {{ Form::open(array('url' => 'interesados_proyectos')) }}     
             <div class="panel-body">
                 <div class="row">
 
@@ -28,8 +28,7 @@
                                     <td>{{$proyecto->empresa}}</td>
                                     </tr>                                    
                                 </table>
-                            </div>
-                            
+                            </div>                
 
                            
                         </div>
@@ -39,14 +38,14 @@
                     </div>
 
                     <div class="col-lg-6 col-lg-offset-3">              
-                     @if ($patrocinadores)  
+                     @if ($interesados)  
                         <div class="form-group">                                                      
                             {{Form::hidden('proyectoid', $proyecto->id, array('class' => 'form-control input-xlarge', 'required' => 'true'))}}                         
                         </div>
 
                        <div class="form-group">
-                            {{ Form::label('patrocinadorid', 'Patrocinador') }}
-                            {{ Form::select('patrocinadorid', $patrocinadores, null, array('class' => 'form-control')) }}                             
+                            {{ Form::label('interesadoid', 'Interesado') }}
+                            {{ Form::select('interesadoid', $interesados, null, array('class' => 'form-control')) }}                             
                         </div>            
                         
                             {{Form::submit('Guardar', array('Class'=>'btn btn-default'))}}
@@ -54,9 +53,8 @@
                             <div class="alert alert-danger" role="alert">
                               <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                               <span class="sr-only">Error:</span>
-                              No hay patrocinadores disponibles para asignar a este proyecto.
-                            </div>
-                            
+                              	No hay interesados disponibles para asignar a este proyecto.
+                            </div>                            
                         @endif                       
                         {{link_to("proyectos/$proyecto->id/attribute", 'Cancelar', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}   
                     </div>

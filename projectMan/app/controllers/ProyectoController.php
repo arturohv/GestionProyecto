@@ -33,7 +33,7 @@ class ProyectoController extends \BaseController {
 	public function create()
 	{
 		$clientes = Cliente::getListCmb();
-		$patrocinadores = Patrocinador::getListCmb();
+		$patrocinadores = Patrocinador::getListCmbAll();
 		$gerentes = Gerente::getListCmb();
 
 		$this->layout->title = 'Nuevo proyecto';
@@ -128,7 +128,7 @@ class ProyectoController extends \BaseController {
 	public function edit($id)
 	{
 		$clientes = Cliente::getListCmb();
-		$patrocinadores = Patrocinador::getListCmb();
+		$patrocinadores = Patrocinador::getListCmbAll();
 		$gerentes = Gerente::getListCmb();
 
 		$this->layout->title = 'Editar Proyecto';
@@ -207,7 +207,10 @@ class ProyectoController extends \BaseController {
 	public function attribute($id)
 	{
 		$proyecto = Proyecto::find($id);
-		$patrocinadores = Proyecto::getListPatrocinadores($id);
+		$patrocinadores = PatrocinadorProyecto::getListPatrocinadores($id);
+		$patrocinadorp = $proyecto->patrocinador;
+		$empleados = EmpleadoProyecto::getListEmpleados($id);
+		$interesados = InteresadoProyecto::getListInteresados($id);
 		$this->layout->title = 'Atributos de Proyecto';
 		$this->layout->titulo = 'Gestión de Proyectos';		
 		$this->layout->nest(
@@ -215,7 +218,10 @@ class ProyectoController extends \BaseController {
 			'proyectos.attribute',
 			array(
 				'proyecto' => $proyecto,
-				'patrocinadores' => $patrocinadores				
+				'patrocinadores' => $patrocinadores,
+				'patrocinadorp' => $patrocinadorp,
+				'empleados' => $empleados,
+				'interesados' => $interesados				
 			)
 		);
 	}

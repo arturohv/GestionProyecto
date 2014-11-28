@@ -72,10 +72,17 @@ Route::get('proyectos/{id}/attribute', 'ProyectoController@attribute');
 /*Patrocinadores Proyectos*/
 Route::resource('patrocinadores_proyectos', 'PatrocinadorProyectoController');
 Route::get('patrocinadores_proyectos/{id}/create', 'PatrocinadorProyectoController@create');
-Route::post('patrocinadores_proyectos/{id}/update', 'PatrocinadorProyectoController@update');
 Route::get('patrocinadores_proyectos/{id}/delete', 'PatrocinadorProyectoController@destroy');
-Route::get('patrocinadores_proyectos/{id}/show', 'PatrocinadorProyectoController@show');
-Route::get('patrocinadores_proyectos/{id}/attribute', 'PatrocinadorProyectoController@attribute');
+
+/*Empleados Proyectos*/
+Route::resource('empleados_proyectos', 'EmpleadoProyectoController');
+Route::get('empleados_proyectos/{id}/create', 'EmpleadoProyectoController@create');
+Route::get('empleados_proyectos/{id}/delete', 'EmpleadoProyectoController@destroy');
+
+/*Interesados Proyectos*/
+Route::resource('interesados_proyectos', 'InteresadoProyectoController');
+Route::get('interesados_proyectos/{id}/create', 'InteresadoProyectoController@create');
+Route::get('interesados_proyectos/{id}/delete', 'InteresadoProyectoController@destroy');
 
 
 
