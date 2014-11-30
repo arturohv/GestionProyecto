@@ -1,4 +1,6 @@
-﻿
+﻿/*drop database gestionpro*/
+/*create database gestionpro*/
+
 create table proyectos(
 	id serial not null primary key,
 	nombre text not null,
@@ -28,8 +30,7 @@ create table patrocinadores(
 create table patrocinadores_proyectos(
 	id serial not null primary key,
 	proyectoid int not null,
-	patrocinadorid int not null,
-	unique(proyectoid,patrocinadorid)
+	patrocinadorid int not null
 );
 /*Check FK*/
 
@@ -54,8 +55,7 @@ create table interesados(
 create table interesados_proyectos(
 	id serial not null primary key,
 	interesadoid int not null,
-	proyectoid int not null,
-	unique(interesadoid,proyectoid)
+	proyectoid int not null
 );
 /*Check FK*/
 
@@ -78,17 +78,9 @@ create table gerentes(
 	departamentoid int not null,
 	rama_ejecutivaid int not null
 );
-
-/*create table gerente_proyecto(
-	id serial not null primary key,
-	gerenteid int not null,
-	proyectoid int not null,
-	UNIQUE (gerenteid,proyectoid)
-);*/
-
 /*Check FK*/
 
-create table gerentes_nivel_autoridad_proyecto(
+create table gerentes_nivel_autoridad(
 	id serial not null primary key,
 	proyectoid int not null,	
 	area_autoridad_id int
@@ -117,7 +109,7 @@ create table clientes(
 create table premisas_restricciones(
 	id serial not null primary key,
 	proyectoid int not null,
-	descripcion text
+	nombre text
 );
 /*Check FK*/
 
@@ -142,8 +134,7 @@ create table empleados(
 create table empleados_proyectos(
 	id serial not null primary key,
 	empleadoid int not null,
-	proyectoid int not null,
-	unique(empleadoid,proyectoid)
+	proyectoid int not null
 );
 /*Check FK*/
 
@@ -160,8 +151,8 @@ create table recursos(
 
 create table unidad_medidas(
 	id serial not null primary key,
-	simbolo varchar(60) not null,
-	nombre int not null
+	simbolo varchar(3) not null,
+	nombre varchar(30) not null
 );
 
 create table alcances(
@@ -175,8 +166,7 @@ create table alcances(
 
 create table calificaciones(
 	id serial not null primary key,	
-	nombre varchar(30) not null,
-	descripcion text not null
+	nombre varchar(30) not null
 );
 
 create table costos(
@@ -196,26 +186,25 @@ create table adquisiciones(
 /*Check FK*/
 
 create table ramas_ejecutivas(
-	id serial not null primary key,
-	nombre varchar(30),	
+	id serial not null primary key,	
+	nombre varchar(30) not null,
 	descripcion text not null
 );
-
 
 alter table proyectos add constraint fk_proyectos_clientes foreign key (clienteid) references clientes (id);
 alter table proyectos add constraint fk_proyectos_patrocinadores foreign key (patrocinadorid) references patrocinadores (id);
 alter table proyectos add constraint fk_proyectos_gerentes foreign key (gerenteid) references gerentes (id);
 
-/*1*/alter table patrocinadores add constraint fk_patrocinadores_cargos foreign key (cargoid) references cargos (id);
+alter table patrocinadores add constraint fk_patrocinadores_cargos foreign key (cargoid) references cargos (id);
 alter table patrocinadores add constraint fk_patrocinadores_departamentos foreign key (departamentoid) references departamentos (id);
 alter table patrocinadores add constraint fk_patrocinadores_ramas_ejecutivas foreign key (rama_ejecutivaid) references ramas_ejecutivas (id);
 
 alter table patrocinadores_proyectos add constraint fk_patrocinadores_proyectos_proyectos foreign key (proyectoid) references proyectos (id);
 alter table patrocinadores_proyectos add constraint fk_patrocinadores_proyectos_patrocinadores foreign key (patrocinadorid) references patrocinadores (id);
 
-alter table actividades add constraint fk_actividades_proyectos foreign key (proyectoid) references proyectos (id);
 
-/*2*/alter table interesados add constraint fk_interesados_cargos foreign key (cargoid) references cargos (id);
+
+alter table interesados add constraint fk_interesados_cargos foreign key (cargoid) references cargos (id);
 alter table interesados add constraint fk_interesados_departamentos foreign key (departamentoid) references departamentos (id);
 alter table interesados add constraint fk_interesados_ramas_ejecutivas foreign key (rama_ejecutivaid) references ramas_ejecutivas (id);
 
@@ -226,8 +215,8 @@ alter table gerentes add constraint fk_gerentes_cargos foreign key (cargoid) ref
 alter table gerentes add constraint fk_gerentes_departamentos foreign key (departamentoid) references departamentos (id);
 alter table gerentes add constraint fk_gerentes_ramas_ejecutivas foreign key (rama_ejecutivaid) references ramas_ejecutivas (id);
 
-alter table gerentes_nivel_autoridad_proyecto add constraint fk_gerentes_nivel_autoridad_proyectos foreign key (proyectoid) references proyectos (id);
-alter table gerentes_nivel_autoridad_proyecto add constraint fk_gerentes_nivel_autoridad_areas_autoridad foreign key (area_autoridad_id) references areas_autoridad (id);
+alter table gerentes_nivel_autoridad add constraint fk_gerentes_nivel_autoridad_proyectos foreign key (proyectoid) references proyectos (id);
+alter table gerentes_nivel_autoridad add constraint fk_gerentes_nivel_autoridad_areas_autoridad foreign key (area_autoridad_id) references areas_autoridad (id);
 
 alter table premisas_restricciones add constraint fk_premisas_restricciones_proyectos foreign key (proyectoid) references proyectos (id);
 
@@ -250,5 +239,58 @@ alter table costos add constraint fk_costos_alcances foreign key (alcanceid) ref
 
 alter table adquisiciones add constraint fk_adquisiciones_alcances foreign key (alcanceid) references alcances (id);
 
-/*alter table gerente_proyecto add constraint fk_gerente_proyecto_gerentes foreign key (gerenteid) references gerentes (id);*/
-/*alter table gerente_proyecto add constraint fk_gerente_proyecto_proyectos foreign key (proyectoid) references proyectos (id);*/
+/*Inserts Unidades Medidas*/
+insert into unidad_medidas (simbolo, nombre) values ('u','Unidades');
+insert into unidad_medidas (simbolo, nombre) values ('g','Gramos');
+insert into unidad_medidas (simbolo, nombre) values ('Km','Kilometros');
+insert into unidad_medidas (simbolo, nombre) values ('m','Metros');
+/*Inserts Cargos*/
+insert into cargos (nombre,descripcion) values ('Síndico','Síndico');
+insert into cargos (nombre,descripcion) values ('Regidor','Regidor');
+insert into cargos (nombre,descripcion) values ('Miembro Comunidad','Miembro Comunidad');
+insert into cargos (nombre,descripcion) values ('Alcalde','Alcalde');
+insert into cargos (nombre,descripcion) values ('Alcaldeza','Alcaldeza');
+insert into cargos (nombre,descripcion) values ('Director Proyecto','Director Proyecto');
+insert into cargos (nombre,descripcion) values ('Gestor Proyecto','Gestor Proyecto');
+/*Inserts Departamentos*/
+insert into departamentos (nombre,descripcion) values ('Alcaldía','Alcaldía');
+insert into departamentos (nombre,descripcion) values ('Planificación','Planificación');
+insert into departamentos (nombre,descripcion) values ('Junta Unidad Desarrollo Comunal','Junta Unidad Desarrollo Comunal');
+insert into departamentos (nombre,descripcion) values ('Comunidad','Comunidad');
+insert into departamentos (nombre,descripcion) values ('TICS','TICS');
+insert into departamentos (nombre,descripcion) values ('Enlace Comunal','Enlace Comunal');
+insert into departamentos (nombre,descripcion) values ('Comunicaciones','Comunicaciones');
+insert into departamentos (nombre,descripcion) values ('Unidad Técnica de Gestión Vial','Unidad Técnica de Gestión Vial');
+/*Inserts Ramas Ejecutivas*/
+insert into ramas_ejecutivas (nombre,descripcion) values ('Presupuesto Administración','Presupuesto Administración');
+insert into ramas_ejecutivas (nombre,descripcion) values ('Presupuesto Acueductos','Presupuesto Acueductos');
+insert into ramas_ejecutivas (nombre,descripcion) values ('Presupuesto Junta Vial','Presupuesto Junta Vial');
+/*Inserts Clientes*/
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad La Palmera','palmerala@gmail.com','24740000','24740000','La Palmera, San Carlos');
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad Florencia','florencia@gmail.com','24750000','24750000','Florencia, San Carlos');
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad Aguas Zarcas','aguaszarcas@gmail.com','24740001','24740001','Aguas Zarcas, San Carlos');
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad Ciudad Quesada','quesadaciudad@gmail.com','24600000','24600000','Ciudad Quesada, San Carlos');
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad La Fortuna','fortuna@gmail.com','24690000','24690000','La Fortuna, San Carlos');
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad Venecia','venecia@gmail.com','24720000','24720000','Venecia, San Carlos');
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad Venado','venado@gmail.com','24620000','24620000','Venado, San Carlos');
+insert into clientes (nombre,email,telefono_resi,telefono_movil,direccion_fisica) values ('Comunidad Monterrey','monterrey@gmail.com','24620000','24620000','Monterrey, San Carlos');
+/*Inserts Clientes*/
+insert into gerentes (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Amores Saborío Dixie',6,2,1);
+insert into gerentes (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Esquivel Vargas Gerardo',7,1,2);
+/*Inserts Empleados*/
+insert into empleados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Vargas Rojas Evelyn',7,2,1);
+insert into empleados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Rodriguez Barrantes Gabriela',7,6,1);
+insert into empleados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Peñaranda Prendas Andrea',7,6,1);
+insert into empleados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Acuña Jimenez Vianney',7,6,3);
+/*Inserts Patrocinadores*/
+insert into patrocinadores (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Junta de Desarrollo',3,4,1);
+insert into patrocinadores (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Municipalidad de San Carlos',3,4,1);
+insert into patrocinadores (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('BID',3,4,1);
+insert into patrocinadores (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('IMAS',3,4,3);
+/*Inserts Interesados*/
+insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Ministerio de Transportes',3,4,1);
+insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Municipalidad de San Carlos',3,4,1);
+insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Junta de Desarrollo Comunal',3,4,1);
+insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Ministerio de Energía',3,4,3);
+
+
