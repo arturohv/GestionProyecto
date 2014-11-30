@@ -14,7 +14,8 @@
                                 <li><a data-toggle="tab" href="#sectionB">Empleados</a></li>
                                 <li><a data-toggle="tab" href="#sectionC">Interesados</a></li>
                                 <li><a data-toggle="tab" href="#sectionD">Recursos</a></li>
-                                <li><a data-toggle="tab" href="#sectionE">Riesgos Iniciales</a></li>                              
+                                <li><a data-toggle="tab" href="#sectionE">Riesgos Iniciales</a></li>
+                                <li><a data-toggle="tab" href="#sectionF">Restricciones</a></li>                              
                             </ul>
                             
                             <div class="tab-content">                                 
@@ -215,7 +216,44 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>  
+                                </div> 
+
+                                <div id="sectionF" class="tab-pane fade">
+                                   <br>
+                                <div class="btn-group pull-right">
+                                    {{link_to("restricciones/$proyecto->id/create", 'Nuevo', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}
+
+                                    {{link_to("proyectos", 'Regresar', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}                                    
+                                 </div>                
+                                                                                 
+                                    <div class="col-lg-8 col-lg-offset-2">                                    
+                                        <div class="table-responsive">
+                                            @if (Session::has('message'))
+                                                <div class="alert alert-info">{{ Session::get('message') }}</div>
+                                            @endif
+                                            <table class="table table-hover table-striped" id="lista">
+                                                <thead>
+                                                    <tr>                                                        
+                                                        <th>Descripción</th>                                                                                                                     
+                                                        <th>Acciones</th>                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($restricciones as $restriccion)
+                                                    <tr>                                         
+                                                        <td>{{ $restriccion->nombre }}</td>                                                      
+                                                                                                       
+                                                        <td>                                                          
+
+                                                             {{link_to("restricciones/$restriccion->id/delete", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-trash'), $secure = null);}}
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>   
                             </div>
                         </div>                                 
                     </div>

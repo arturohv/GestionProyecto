@@ -96,6 +96,12 @@ Route::get('riesgos/{id}/create', 'RiesgoController@create');
 Route::get('riesgos/{id}/delete', 'RiesgoController@destroy');
 Route::get('riesgos/{id}/show', 'RiesgoController@show');
 
+/*Restricciones*/
+Route::resource('restricciones', 'RestriccionController');
+Route::get('restricciones/{id}/create', 'RestriccionController@create');
+Route::get('restricciones/{id}/delete', 'RestriccionController@destroy');
+
+
 
 
 
