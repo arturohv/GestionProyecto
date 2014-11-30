@@ -292,5 +292,10 @@ insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values 
 insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Municipalidad de San Carlos',3,4,1);
 insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Junta de Desarrollo Comunal',3,4,1);
 insert into interesados (nombre,cargoid,departamentoid,rama_ejecutivaid) values ('Ministerio de Energía',3,4,3);
+/*Inserts Calificaciones*/
+insert into calificaciones (nombre) values ('Sin comenzar');
+insert into calificaciones (nombre) values ('Iniciado');
+insert into calificaciones (nombre) values ('En Revisión');
+insert into calificaciones (nombre) values ('Finalizado');
 
 

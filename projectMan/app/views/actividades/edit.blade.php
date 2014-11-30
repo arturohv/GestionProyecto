@@ -2,10 +2,10 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fglyphicon glyphicon-plus"></i> Agregar nuevo riesgo                
+                <i class="glyphicon glyphicon-pencil"></i> Editar Actividad                
             </div>
             {{ HTML::ul($errors->all()) }}
-            {{ Form::open(array('url' => 'riesgos')) }}     
+            {{ Form::open(array('url' => "actividades/$actividad->id/update")) }}     
             <div class="panel-body">
                 <div class="row">
 
@@ -33,21 +33,23 @@
                         <!-- /.table-responsive -->
                     </div>
 
-                    <div class="col-lg-6 col-lg-offset-3">              
-                    
-                        <div class="form-group">                                                      
-                            {{Form::hidden('proyectoid', $proyecto->id, array('class' => 'form-control input-xlarge', 'required' => 'true'))}}                         
-                        </div>
+                    <div class="col-lg-6 col-lg-offset-3">    
+                        
 
                         <div class="form-group">
                             {{ Form::label('descripcion', 'Descripción') }}                                
-                            {{Form::text('descripcion', Input::old('descripcion'), array('class' => 'form-control input-xlarge', 'required' => 'true'))}}                      
+                            {{Form::text('descripcion', $actividad->descripcion, array('class' => 'form-control input-xlarge', 'required' => 'true'))}}                      
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('fecha', 'Fecha Límite') }}                                
-                            {{Form::text('fecha', Input::old('fecha'), array('class' => 'form-control input-xlarge', 'required' => 'true'))}}                      
-                        </div>                       
+                            {{ Form::label('fecha_inicio', 'Fecha Inicial') }}                                
+                            {{Form::text('fecha_inicio', $actividad->fecha_inicio, array('class' => 'form-control input-xlarge', 'required' => 'true'))}}                      
+                        </div>
+
+                        <div class="form-group">
+                            {{ Form::label('fecha_fin', 'Fecha Final') }}                                
+                            {{Form::text('fecha_fin', $actividad->fecha_fin, array('class' => 'form-control input-xlarge', 'required' => 'true'))}}                      
+                        </div>                              
                         
                             {{Form::submit('Guardar', array('Class'=>'btn btn-default'))}}                            
                             

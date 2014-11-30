@@ -101,6 +101,21 @@ Route::resource('restricciones', 'RestriccionController');
 Route::get('restricciones/{id}/create', 'RestriccionController@create');
 Route::get('restricciones/{id}/delete', 'RestriccionController@destroy');
 
+/*Actividades*/
+Route::resource('actividades', 'ActividadController');
+Route::get('actividades/{id}/create', 'ActividadController@create');
+Route::get('actividades/{id}/delete', 'ActividadController@destroy');
+Route::get('actividades/{id}/show', 'ActividadController@show');
+Route::post('actividades/{id}/update', 'ActividadController@update');
+
+/*Alcances*/
+Route::resource('alcances', 'AlcanceController');
+Route::get('alcances/{id}/index', 'AlcanceController@index');
+Route::get('alcances/{id}/create', 'AlcanceController@create');
+Route::get('alcances/{id}/delete', 'AlcanceController@destroy');
+Route::get('alcances/{id}/show', 'AlcanceController@show');
+Route::post('alcances/{id}/update', 'AlcanceController@update');
+
 
 
 

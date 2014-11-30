@@ -214,6 +214,8 @@ class ProyectoController extends \BaseController {
 		$recursos = Recurso::getListRecursos($id);
 		$riesgos = RiesgoInicial::getListRiesgos($id);
 		$restricciones = Restriccion::getListRestricciones($id);
+		$actividades = Actividad::getListActividades($id);
+
 		$this->layout->title = 'Atributos de Proyecto';
 		$this->layout->titulo = 'Gestión de Proyectos';		
 		$this->layout->nest(
@@ -227,7 +229,8 @@ class ProyectoController extends \BaseController {
 				'interesados' => $interesados,
 				'recursos' => $recursos,
 				'riesgos' => $riesgos,
-				'restricciones' => $restricciones				
+				'restricciones' => $restricciones,
+				'actividades' => $actividades				
 			)
 		);
 	}
