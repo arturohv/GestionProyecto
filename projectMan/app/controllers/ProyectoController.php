@@ -212,6 +212,7 @@ class ProyectoController extends \BaseController {
 		$empleados = EmpleadoProyecto::getListEmpleados($id);
 		$interesados = InteresadoProyecto::getListInteresados($id);
 		$recursos = Recurso::getListRecursos($id);
+		$riesgos = RiesgoInicial::getListRiesgos($id);
 		$this->layout->title = 'Atributos de Proyecto';
 		$this->layout->titulo = 'Gestión de Proyectos';		
 		$this->layout->nest(
@@ -223,7 +224,8 @@ class ProyectoController extends \BaseController {
 				'patrocinadorp' => $patrocinadorp,
 				'empleados' => $empleados,
 				'interesados' => $interesados,
-				'recursos' => $recursos				
+				'recursos' => $recursos,
+				'riesgos' => $riesgos				
 			)
 		);
 	}

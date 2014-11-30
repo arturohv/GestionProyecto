@@ -87,9 +87,14 @@ Route::get('interesados_proyectos/{id}/delete', 'InteresadoProyectoController@de
 /*Recursos*/
 Route::resource('recursos', 'RecursoController');
 Route::get('recursos/{id}/create', 'RecursoController@create');
-Route::post('recursos/{id}/update', 'RecursoController@update');
 Route::get('recursos/{id}/delete', 'RecursoController@destroy');
 Route::get('recursos/{id}/show', 'RecursoController@show');
+
+/*Riesgos*/
+Route::resource('riesgos', 'RiesgoController');
+Route::get('riesgos/{id}/create', 'RiesgoController@create');
+Route::get('riesgos/{id}/delete', 'RiesgoController@destroy');
+Route::get('riesgos/{id}/show', 'RiesgoController@show');
 
 
 
