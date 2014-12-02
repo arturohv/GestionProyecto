@@ -116,6 +116,23 @@ Route::get('alcances/{id}/delete', 'AlcanceController@destroy');
 Route::get('alcances/{id}/show', 'AlcanceController@show');
 Route::post('alcances/{id}/update', 'AlcanceController@update');
 
+/*Costos*/
+Route::resource('costos', 'CostoController');
+Route::get('costos/{id}/index', 'CostoController@index');
+Route::get('costos/{id}/create', 'CostoController@create');
+Route::get('costos/{id}/delete', 'CostoController@destroy');
+Route::get('costos/{id}/show', 'CostoController@show');
+Route::post('costos/{id}/update', 'CostoController@update');
+
+/*Adquisiciones*/
+Route::resource('adquisiciones', 'AdquisicionController');
+Route::get('adquisiciones/{id}/index', 'AdquisicionController@index');
+Route::get('adquisiciones/{id}/create', 'AdquisicionController@create');
+Route::get('adquisiciones/{id}/delete', 'AdquisicionController@destroy');
+Route::get('adquisiciones/{id}/show', 'AdquisicionController@show');
+Route::post('adquisiciones/{id}/update', 'AdquisicionController@update');
+
+
 
 
 

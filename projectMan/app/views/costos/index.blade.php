@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="glyphicon glyphicon-eye-open"></i> Alcances de Proyecto: <strong>{{$proyecto->nombre}}</strong> / <strong>{{$proyecto->empresa}}</strong>             
+                <i class="glyphicon glyphicon-eye-open"></i> Costos del Alcance - Proyecto: <strong>{{$proyecto->nombre}}</strong>          
             </div>
                  
             <div class="panel-body">
@@ -14,9 +14,9 @@
                                     <div class="table-responsive">
                                         <table class="table table-condensed" id="lista">
                                             <tr>
-                                            <td><strong>Actividad:</strong></td>
-                                            <td>{{$actividad->descripcion}}</td>                                            
-                                            <tr>                                                                             
+                                            <td><strong>Alcance:</strong></td>
+                                            <td>{{$alcance->descripcion}}</td>                
+                                            <tr>                                                 
                                         </table>
                                     </div>                   
                                 </div>                   
@@ -30,35 +30,31 @@
                                             @endif
 
                                             <div class="btn-group pull-right">
-                                    {{link_to("alcances/$actividad->id/create", 'Nuevo', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}
+                                    {{link_to("costos/$alcance->id/create", 'Nuevo', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}
 
-                                    {{link_to("proyectos", 'Regresar', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}                                    
+                                    {{link_to("alcances/$alcance->actividadid/index", 'Regresar', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}                                    
                                  </div>      
                                             <table class="table table-hover table-striped" id="lista2">
                                                 <thead>
                                                     <tr>                                                        
                                                         <th>Descripción</th>
-                                                        <th>Calificación</th>                                                
+                                                        <th>Monto Colones</th>                                                
                                                         <th>Acciones</th>                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($alcances as $alcance)
+                                                    @foreach($costos as $costo)
                                                     <tr>                                         
-                                                        <td>{{ $alcance->descripcion }}</td>
-                                                        <td>{{ $alcance->nombre }}</td>
+                                                        <td>{{ $costo->descripcion }}</td>
+                                                        <td>{{ $costo->monto }}</td>
                                                                                
                                                                                                        
                                                         <td>                                                          
-                                                            {{link_to("alcances/$alcance->id/show", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-eye-open'), $secure = null);}}
+                                                            {{link_to("costos/$costo->id/show", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-eye-open'), $secure = null);}}
 
-                                                            {{link_to("alcances/$alcance->id/edit", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-pencil'), $secure = null);}}
+                                                            {{link_to("costos/$costo->id/edit", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-pencil'), $secure = null);}}
 
-                                                            {{link_to("alcances/$alcance->id/delete", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-trash'), $secure = null);}}
-
-                                                             {{link_to("costos/$alcance->id/index", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-euro'), $secure = null);}} 
-
-                                                             {{link_to("adquisiciones/$alcance->id/index", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-glass'), $secure = null);}}                                                                 
+                                                            {{link_to("costos/$costo->id/delete", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-trash'), $secure = null);}}                                                            
                                                         </td>
                                                     </tr>
                                                     @endforeach

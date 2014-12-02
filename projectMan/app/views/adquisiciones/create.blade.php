@@ -2,10 +2,10 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fglyphicon glyphicon-plus"></i> Agregar nuevo costo                
+                <i class="fglyphicon glyphicon-plus"></i> Agregar nueva adquisición                
             </div>
             {{ HTML::ul($errors->all()) }}
-            {{ Form::open(array('url' => 'costos')) }}     
+            {{ Form::open(array('url' => 'adquisiciones')) }}     
             <div class="panel-body">
                 <div class="row">
 
@@ -52,7 +52,7 @@
                             {{Form::submit('Guardar', array('Class'=>'btn btn-default'))}}                            
                             
                                            
-                            {{link_to("costos/$alcance->id/index", 'Cancelar', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}   
+                            {{link_to("adquisiciones/$alcance->id/index", 'Cancelar', $attributes = array('Class'=>'btn btn-default'), $secure = null);}}   
                     </div>
                  </div> 
             </div>

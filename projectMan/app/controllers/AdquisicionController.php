@@ -1,6 +1,6 @@
 <?php
 
-class CostoController extends \BaseController {
+class AdquisicionController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -11,18 +11,18 @@ class CostoController extends \BaseController {
 	{
 		
 		$alcance = Alcance::find($id);
-		$costos = Costo::getListCostos($id);
+		$adquisiciones = Adquisicion::getListAdquisiciones($id);
 		$actividad = Actividad::find($alcance->actividadid);
 		$proyecto = Proyecto::find($actividad->proyectoid);
 
-		$this->layout->title = 'Costos';
+		$this->layout->title = 'Adquisiciones';
 		$this->layout->titulo = 'Gestión de Alcances';
 		$this->layout->nest(
 			'content',
-			'costos.index',
+			'adquisiciones.index',
 			array(
 				'alcance' => $alcance,
-				'costos' => $costos,
+				'adquisiciones' => $adquisiciones,
 				'proyecto' => $proyecto
 			)
 		);
@@ -38,11 +38,11 @@ class CostoController extends \BaseController {
 	{			
         $alcance = Alcance::find($id);
         
-		$this->layout->title = 'Nuevo Costo';
+		$this->layout->title = 'Nueva Adquisición';
 		$this->layout->titulo = 'Gestión de Alcances';
 		$this->layout->nest(
 			'content',
-			'costos.create',
+			'adquisiciones.create',
 			array(
 				'alcance' => $alcance									
 			)
@@ -62,13 +62,13 @@ class CostoController extends \BaseController {
 		$descripcion = Input::get('descripcion');
 		$monto = Input::get('monto');
 
-		$costo = new Costo();
-		$costo->alcanceid = $alcanceid;
-		$costo->descripcion = $descripcion;
-		$costo->monto = $monto;
-		$costo->save();
+		$adquisicion = new Adquisicion();
+		$adquisicion->alcanceid = $alcanceid;
+		$adquisicion->descripcion = $descripcion;
+		$adquisicion->monto = $monto;
+		$adquisicion->save();
 		Session::flash('message', 'Registro guardado satisfactoriamente!');
-		return Redirect::to('costos/'.$alcanceid.'/index');
+		return Redirect::to('adquisiciones/'.$alcanceid.'/index');
 	}
 
 
@@ -80,15 +80,15 @@ class CostoController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$this->layout->title = 'Mostrar Costo';
+		$this->layout->title = 'Mostrar Adquisición';
 		$this->layout->titulo = 'Gestión de Alcances';
-		$costo = Costo::find($id);
+		$adquisicion = Adquisicion::find($id);
 		
 		$this->layout->nest(
 			'content',
-			'costos.show',
+			'adquisiciones.show',
 			array(
-				'costo' => $costo
+				'adquisicion' => $adquisicion
 				
 			)
 		);
@@ -103,15 +103,15 @@ class CostoController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$this->layout->title = 'Editar Costo';
+		$this->layout->title = 'Editar Adquisición';
 		$this->layout->titulo = 'Gestión de Alcances';
-		$costo = Costo::find($id);
-		$alcance = Alcance::find($costo->alcanceid);		
+		$adquisicion = Adquisicion::find($id);
+		$alcance = Alcance::find($adquisicion->alcanceid);		
 		$this->layout->nest(
 			'content',
-			'costos.edit',
+			'adquisiciones.edit',
 			array(
-				'costo' => $costo,
+				'adquisicion' => $adquisicion,
 				'alcance' => $alcance				
 			)
 		);
@@ -129,12 +129,12 @@ class CostoController extends \BaseController {
 		$descripcion = Input::get('descripcion');
 		$monto = Input::get('monto');
 		
-		$costo = Costo::find($id);
-		$costo->descripcion = $descripcion;
-		$costo->monto = $monto;
-		$costo->save();
+		$adquisicion = Adquisicion::find($id);
+		$adquisicion->descripcion = $descripcion;
+		$adquisicion->monto = $monto;
+		$adquisicion->save();
 		Session::flash('message', 'Registro actualizado satisfactoriamente!');
-		return Redirect::to('costos/'.$costo->alcanceid.'/index');
+		return Redirect::to('adquisiciones/'.$adquisicion->alcanceid.'/index');
 	}
 
 
@@ -146,10 +146,10 @@ class CostoController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$costo = Costo::find($id);
-		$costo->delete();
+		$adquisicion = Adquisicion::find($id);
+		$adquisicion->delete();
 		Session::flash('message', 'Registro eliminado satisfactoriamente!');
-		return Redirect::to('costos/'.$costo->alcanceid.'/index');
+		return Redirect::to('adquisiciones/'.$adquisicion->alcanceid.'/index');
 	}
 
 
