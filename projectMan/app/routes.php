@@ -132,6 +132,11 @@ Route::get('adquisiciones/{id}/delete', 'AdquisicionController@destroy');
 Route::get('adquisiciones/{id}/show', 'AdquisicionController@show');
 Route::post('adquisiciones/{id}/update', 'AdquisicionController@update');
 
+/*Tipos de Comunicacion*/
+Route::resource('tiposcomunicacion', 'TipoComunicacionController');
+Route::post('tiposcomunicacion/{id}/update', 'TipoComunicacionController@update');
+Route::get('tiposcomunicacion/{id}/delete', 'TipoComunicacionController@destroy');
+Route::get('tiposcomunicacion/{id}/show', 'TipoComunicacionController@show');
 
 
 

@@ -15,5 +15,6 @@ class EmpleadoProyecto extends Eloquent
 				inner join empleados pt on pt.id = pp.empleadoid
 				where pp.proyectoid = '.$id;
 				return DB::select($sql);
-	}    
+	}
+	
 }

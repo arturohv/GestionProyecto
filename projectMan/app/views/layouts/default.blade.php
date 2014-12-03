@@ -290,6 +290,9 @@
                                 <li>
                                     <a href="/ramas">Ramas Ejecutivas</a>
                                 </li>
+                                <li>
+                                    <a href="/tiposcomunicacion">Tipos de Comunicación</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

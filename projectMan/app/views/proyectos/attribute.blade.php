@@ -92,6 +92,8 @@
                                                             {{link_to("empleados/$empleado->empleadoid/show", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-eye-open'), $secure = null);}}
 
                                                              {{link_to("empleados_proyectos/$empleado->idkey/delete", '', $attributes = array('Class'=>'btn btn-default btn-xs glyphicon glyphicon-trash'), $secure = null);}}
+
+                                                              
                                                         </td>
                                                     </tr>
                                                     @endforeach

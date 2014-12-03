@@ -197,7 +197,6 @@ create table calidad(
 	descripcion text not null
 );
 
-
 create table tipo_comunicacion(
 	id serial not null primary key,	
 	nombre text not null
