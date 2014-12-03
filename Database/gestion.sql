@@ -191,6 +191,35 @@ create table ramas_ejecutivas(
 	descripcion text not null
 );
 
+create table calidad(
+	id serial not null primary key,
+	adquisicionid int  not null,
+	descripcion text not null
+);
+
+
+create table tipo_comunicacion(
+	id serial not null primary key,	
+	nombre text not null
+);
+
+create table tipo_comunicacion_empleado(
+	id serial not null primary key,
+	empleadoid int not null,
+	tipocomunicacionid int not null,
+	proyectoid int not null	
+);
+
+create table tipo_comunicacion_interesado(
+	id serial not null primary key,
+	interesadoid int not null,
+	tipocomunicacionid int not null,
+	proyectoid int not null	
+);
+
+
+
+
 alter table proyectos add constraint fk_proyectos_clientes foreign key (clienteid) references clientes (id);
 alter table proyectos add constraint fk_proyectos_patrocinadores foreign key (patrocinadorid) references patrocinadores (id);
 alter table proyectos add constraint fk_proyectos_gerentes foreign key (gerenteid) references gerentes (id);
@@ -238,6 +267,17 @@ alter table alcances add constraint fk_alcances_calificaciones foreign key (cali
 alter table costos add constraint fk_costos_alcances foreign key (alcanceid) references alcances (id);
 
 alter table adquisiciones add constraint fk_adquisiciones_alcances foreign key (alcanceid) references alcances (id);
+
+alter table calidad add constraint fk_calidad_adquisiciones foreign key (adquisicionid) references adquisiciones (id);
+
+alter table tipo_comunicacion_empleado add constraint tipo_comunicacion_empleado_empleado foreign key (empleadoid) references empleados (id);
+alter table tipo_comunicacion_empleado add constraint tipo_comunicacion_empleado_tipo_comunicacion foreign key (tipocomunicacionid) references tipo_comunicacion (id);
+alter table tipo_comunicacion_empleado add constraint tipo_comunicacion_empleado_proyecto foreign key (proyectoid) references proyectos (id);
+
+alter table tipo_comunicacion_interesado add constraint tipo_comunicacion_interesado_interesado foreign key (interesadoid) references interesados (id);
+alter table tipo_comunicacion_interesado add constraint tipo_comunicacion_interesado_tipo_comunicacion foreign key (tipocomunicacionid) references tipo_comunicacion (id);
+alter table tipo_comunicacion_interesado add constraint tipo_comunicacion_interesado_proyecto foreign key (proyectoid) references proyectos (id);
+
 
 /*Inserts Unidades Medidas*/
 insert into unidad_medidas (simbolo, nombre) values ('u','Unidades');
@@ -297,5 +337,10 @@ insert into calificaciones (nombre) values ('Sin comenzar');
 insert into calificaciones (nombre) values ('Iniciado');
 insert into calificaciones (nombre) values ('En Revisión');
 insert into calificaciones (nombre) values ('Finalizado');
+/*Inserts tipo_comunicacion*/
+insert into tipo_comunicacion (nombre) values ('Correo Electrónico');
+insert into tipo_comunicacion (nombre) values ('Telefóno');
+insert into tipo_comunicacion (nombre) values ('Fax');
+insert into tipo_comunicacion (nombre) values ('Telegrama');
 
 
