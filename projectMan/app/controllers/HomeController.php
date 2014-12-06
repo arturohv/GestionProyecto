@@ -17,6 +17,7 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
+		
     			
 		$this->layout->title = 'Dashboard';
 		$this->layout->titulo = 'Tablero de Control';
@@ -24,6 +25,28 @@ class HomeController extends BaseController {
             'content',
             'dashboard.index'
         );
+	}
+
+	public function getGrafico1()
+	{			
+
+    	if (Request::ajax())		
+		{					
+    		$resultados = Proyecto::getResultados();    		
+    		return Response::Json($resultados);
+		}
+		
+	}
+
+	public function getGrafico2()
+	{			
+
+    	if (Request::ajax())		
+		{					
+    		$resultados = Proyecto::getResultados2();    		   		
+    		return Response::Json($resultados);
+		}
+		
 	}
 
 }

@@ -24,6 +24,8 @@
     <!-- Custom Fonts -->    
     {{HTML::style('bootstrap/font-awesome-4.1.0/css/font-awesome.min.css')}}
     {{HTML::style('bootstrap/css/plugins/dataTables.bootstrap.css')}}
+
+
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -279,7 +281,7 @@
                             <a class="active" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Mantenimiento<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-wrench"></i> Mantenimiento<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/cargos">Cargos</a>
@@ -298,7 +300,7 @@
                         </li>
 
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Personas<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-user"></i> Personas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/clientes">Clientes</a>
@@ -312,11 +314,20 @@
                         </li>
 
                          <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Gestión de Proyecto<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-random"></i> Gestión de Proyecto<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="/proyectos">Proyectos</a>
-                                    <a href="/reportes">Reportes</a>
+                                    <li>
+                                        <a href="#"><i class="glyphicon glyphicon-print"></i> Reportes<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="/seleccionproyectosacta">Acta de Proyecto</a>
+                                                <a href="/gerentes">DTS</a>                        
+                                            </li>                                
+                                        </ul>
+                            <!-- /.nav-second-level -->
+                                     </li>
                                 </li>                                
                             </ul>
                             <!-- /.nav-second-level -->
@@ -360,10 +371,69 @@
     {{HTML::script('bootstrap/js/plugins/morris/morris-data.js')}}  -->
 
     <!-- Custom Theme JavaScript -->
-    {{HTML::script('bootstrap/js/sb-admin-2.js')}} 
-    
-    
+    {{HTML::script('bootstrap/js/sb-admin-2.js')}}
 
+    
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            $.getJSON('resultados', {}, function(json) {
+                var data = [];
+                for (var i = 0; i < json.length; i++) {
+                    data.push([json[i].nombre, parseInt(json[i].cant_actividad)]); 
+                };
+                cargar_grafico_pie_basic($('#grafico'), data, 'Actividades por Proyecto','Cantidad de Actividades');              
+            });
+
+            $.getJSON('resultados2', {}, function(json) {
+                var data = [];
+                for (var i = 0; i < json.length; i++) {
+                    data.push([json[i].nombre, parseInt(json[i].total_costo)]); 
+                };
+                cargar_grafico_pie_basic($('#grafico2'), data, 'Costos por Proyecto','Monto Costo');              
+            });
+            
+        });
+
+        function cargar_grafico_pie_basic (selector, data, titulo, tooltipSerie) {
+                selector.highcharts({
+                chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: titulo
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+                series: [{
+                    type: 'pie',
+                    name: tooltipSerie,
+                    data: data
+                }]
+            });
+        
+        }
+
+        
+    </script>
+    
+    {{HTML::script('bootstrap/js/highcharts/highcharts.js')}}
+    {{HTML::script('bootstrap/js/highcharts/highcharts-3d.js')}}
+    {{HTML::script('bootstrap/js/highcharts/exporting.js')}} 
 
 </body>
 

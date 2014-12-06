@@ -138,6 +138,15 @@ Route::post('tiposcomunicacion/{id}/update', 'TipoComunicacionController@update'
 Route::get('tiposcomunicacion/{id}/delete', 'TipoComunicacionController@destroy');
 Route::get('tiposcomunicacion/{id}/show', 'TipoComunicacionController@show');
 
+/*Reportes*/
+Route::get('seleccionproyectosacta', 'SeleccionProyectoActa@index');
+Route::get('seleccionproyectosacta/{id}/acta', 'SeleccionProyectoActa@acta');
+
+/*Graficos*/
+Route::get('resultados', 'HomeController@getGrafico1');
+Route::get('resultados2', 'HomeController@getGrafico2');
+
+
 
 
 
