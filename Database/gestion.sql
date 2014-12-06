@@ -223,6 +223,8 @@ alter table proyectos add constraint fk_proyectos_clientes foreign key (clientei
 alter table proyectos add constraint fk_proyectos_patrocinadores foreign key (patrocinadorid) references patrocinadores (id);
 alter table proyectos add constraint fk_proyectos_gerentes foreign key (gerenteid) references gerentes (id);
 
+alter table actividades add constraint fk_actividades_proyectos foreign key (proyectoid) references proyectos (id);
+
 alter table patrocinadores add constraint fk_patrocinadores_cargos foreign key (cargoid) references cargos (id);
 alter table patrocinadores add constraint fk_patrocinadores_departamentos foreign key (departamentoid) references departamentos (id);
 alter table patrocinadores add constraint fk_patrocinadores_ramas_ejecutivas foreign key (rama_ejecutivaid) references ramas_ejecutivas (id);
